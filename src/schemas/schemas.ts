@@ -1,9 +1,9 @@
 import { ObjectSchema } from "joi";
 
-import { registerSchema, loginSchema } from "./authSchemas";
+import { registerPatientSchema, loginSchema } from "./authSchemas";
 
 const schemas: { [key: string]: ObjectSchema } = {
-  registerSchema,
+  registerPatientSchema,
   loginSchema,
 };
 

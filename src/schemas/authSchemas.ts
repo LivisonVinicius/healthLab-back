@@ -4,11 +4,11 @@ import { joiPasswordExtendCore } from "joi-password";
 
 const joiPassword = joi.extend(joiPasswordExtendCore);
 
-export const registerSchema = joi.object({
+export const registerPatientSchema = joi.object({
   email: joi.string().email().required(),
   password: joiPassword
     .string()
-    .min(10)
+    .min(8)
     .minOfLowercase(1)
     .minOfUppercase(1)
     .minOfNumeric(1)
@@ -25,12 +25,6 @@ export const registerSchema = joi.object({
         "{#label} should contain at least {#min} numeric character",
       "password.noWhiteSpaces": "{#label} should not contain white spaces",
     }),
-  confirmPassword: joi
-    .string()
-    .equal(joi.ref("password"))
-    .required()
-    .label("Confirm password")
-    .messages({ "string.only": "{{#label}} does not match" }),
 });
 
 export const loginSchema = joi.object({
