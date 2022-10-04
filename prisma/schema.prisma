@@ -10,18 +10,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Patient {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-
-  @@map("patients")
+model User {
+  id         Int         @id @default(autoincrement())
+  email      String      @unique
+  password   String
+  Doctor     Doctor?
+  Technician Technician?
 }
 
 model Doctor {
   id         Int     @id @default(autoincrement())
-  email      String  @unique
-  password   String
+  User       User    @relation(fields: [userId], references: [id])
+  userId     Int     @unique
   speciality String
   admin      Boolean @default(false)
 
@@ -30,9 +30,9 @@ model Doctor {
 
 model Technician {
   id         Int    @id @default(autoincrement())
-  email      String @unique
-  password   String
   speciality String
+  User       User   @relation(fields: [userId], references: [id])
+  userId     Int    @unique
 
   @@map("technicians")
 }
