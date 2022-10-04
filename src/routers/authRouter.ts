@@ -10,4 +10,10 @@ authRouter.post(
   authControllers.registerPatient
 );
 
+authRouter.post(
+  "/signin",
+  schemaValidator("loginSchema"),
+  authControllers.login
+);
+
 export default authRouter;

@@ -1,6 +1,7 @@
 import { IUserType } from "../types/userType";
-import { encrypt } from "../utils/bcryptFunctions";
+import { compare, encrypt } from "../utils/bcryptFunctions";
 import * as userRepository from "../repositories/userRepository";
+import { sign } from "../utils/jwtFunctions";
 
 export async function registerPatient(user: IUserType) {
   const existPatient = await userRepository.findByEmail(user.email);
@@ -13,3 +14,15 @@ export async function registerPatient(user: IUserType) {
     password: user.password,
   });
 }
+
+export async function loginUser(user: IUserType) {
+  const existUser = await userRepository.findByEmail(user.email);
+  if (!existUser) {
+    throw { type: "Unauthorized", message: "Password or Email wrong" };
+  }
+  if (!compare(user.password, existUser.password)) {
+    throw { type: "Unauthorized", message: "Password or Email wrong" };
+  }
+  const token = sign({ id: existUser.id });
+  return token;
+} 
