@@ -4,8 +4,8 @@ import * as userRepository from "../repositories/userRepository";
 import * as technicianRepository from "../repositories/technicianRepository";
 
 export async function registerTechnician(user: ITechnicianType) {
-  const existPatient = await userRepository.findByEmail(user.email);
-  if (existPatient) {
+  const existTechnician = await userRepository.findByEmail(user.email);
+  if (existTechnician) {
     throw { type: "Conflict", message: "Email already in use" };
   }
   user.password = encrypt(user.password);

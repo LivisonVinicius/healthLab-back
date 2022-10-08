@@ -9,3 +9,9 @@ export type ITechnicianType = {
   speciality: string;
 };
 export type ITechnicianInsertType = Omit<Technician, "id">;
+export type IDoctorType = {
+  email: string;
+  password: string;
+  speciality: string;
+};
+export type IDoctorInsertType = Omit<Technician, "id" | "admin">;

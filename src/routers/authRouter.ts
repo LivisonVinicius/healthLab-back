@@ -17,6 +17,12 @@ authRouter.post(
 )
 
 authRouter.post(
+  "/signup/doctor",
+  schemaValidator("registerDoctorSchema"),
+  authControllers.registerDoctor
+)
+
+authRouter.post(
   "/signin",
   schemaValidator("loginSchema"),
   authControllers.login
