@@ -11,6 +11,12 @@ authRouter.post(
 );
 
 authRouter.post(
+  "/signup/technician",
+  schemaValidator("registerTechnicianSchema"),
+  authControllers.registerTechnician
+)
+
+authRouter.post(
   "/signin",
   schemaValidator("loginSchema"),
   authControllers.login

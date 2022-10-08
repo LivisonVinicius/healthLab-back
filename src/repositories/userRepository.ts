@@ -2,8 +2,8 @@ import { client } from "../database";
 import { IUserType } from "../types/userType";
 
 export async function insert(user: IUserType) {
-  await client.user.create({ data: user });
-  return;
+  const createdUser = await client.user.create({ data: user });
+  return createdUser.id;
 }
 
 export async function findByEmail(email: string) {
