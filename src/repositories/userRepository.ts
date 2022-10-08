@@ -11,6 +11,11 @@ export async function findByEmail(email: string) {
   return user;
 }
 
+export async function findByCpf(cpf: string) {
+  const user = await client.user.findFirst({ where: { cpf } });
+  return user;
+}
+
 export async function findById(id: number) {
   const user = await client.user.findFirst({ where: { id } });
   return user;

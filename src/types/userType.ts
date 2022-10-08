@@ -7,11 +7,15 @@ export type ITechnicianType = {
   email: string;
   password: string;
   speciality: string;
+  name: string;
+  cpf: string;
 };
 export type ITechnicianInsertType = Omit<Technician, "id">;
 export type IDoctorType = {
   email: string;
   password: string;
   speciality: string;
+  name: string;
+  cpf: string;
 };
-export type IDoctorInsertType = Omit<Technician, "id" | "admin">;
+export type IDoctorInsertType = Omit<Doctor, "id" | "admin">;

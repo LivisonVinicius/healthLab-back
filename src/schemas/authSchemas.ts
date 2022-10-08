@@ -25,6 +25,12 @@ export const registerPatientSchema = joi.object({
         "{#label} should contain at least {#min} numeric character",
       "password.noWhiteSpaces": "{#label} should not contain white spaces",
     }),
+  name: joi.string().required(),
+  cpf: joi
+    .string()
+    .pattern(/^[0-9]+$/)
+    .min(11)
+    .required(),
 });
 
 export const registerTechnicianSchema = joi.object({
@@ -49,6 +55,12 @@ export const registerTechnicianSchema = joi.object({
       "password.noWhiteSpaces": "{#label} should not contain white spaces",
     }),
   speciality: joi.string().required(),
+  name: joi.string().required(),
+  cpf: joi
+    .string()
+    .pattern(/^[0-9]+$/)
+    .min(11)
+    .required(),
 });
 
 export const registerDoctorSchema = joi.object({
@@ -73,6 +85,12 @@ export const registerDoctorSchema = joi.object({
       "password.noWhiteSpaces": "{#label} should not contain white spaces",
     }),
   speciality: joi.string().required(),
+  name: joi.string().required(),
+  cpf: joi
+    .string()
+    .pattern(/^[0-9]+$/)
+    .min(11)
+    .required(),
 });
 
 export const loginSchema = joi.object({

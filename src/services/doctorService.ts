@@ -8,10 +8,16 @@ export async function registerDoctor(user: IDoctorType) {
   if (existDoctor) {
     throw { type: "Conflict", message: "Email already in use" };
   }
+  const existTechnicianCpf = await userRepository.findByCpf(user.cpf);
+  if (existTechnicianCpf) {
+    throw { type: "Conflict", message: "Cpf already in use" };
+  }
   user.password = encrypt(user.password);
   const id = await userRepository.insert({
     email: user.email,
     password: user.password,
+    name: user.name,
+    cpf: user.cpf,
   });
   await doctorRepository.insert({
     userId: id,
