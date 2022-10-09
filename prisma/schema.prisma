@@ -11,21 +11,25 @@ datasource db {
 }
 
 model User {
-  id         Int         @id @default(autoincrement())
-  email      String      @unique
-  password   String
-  name       String
-  cpf        String      @unique
-  Doctor     Doctor?
-  Technician Technician?
+  id                 Int           @id @default(autoincrement())
+  email              String        @unique
+  password           String
+  name               String
+  cpf                String        @unique
+  Doctor             Doctor?
+  Technician         Technician?
+  PacientAppointment Appointment[]
+
+  @@map("users")
 }
 
 model Doctor {
-  id         Int     @id @default(autoincrement())
-  User       User    @relation(fields: [userId], references: [id])
-  userId     Int     @unique
-  speciality String
-  admin      Boolean @default(false)
+  id          Int           @id @default(autoincrement())
+  User        User          @relation(fields: [userId], references: [id])
+  userId      Int           @unique
+  speciality  String
+  admin       Boolean       @default(false)
+  Appointment Appointment[]
 
   @@map("doctor")
 }
@@ -35,6 +39,38 @@ model Technician {
   speciality String
   User       User   @relation(fields: [userId], references: [id])
   userId     Int    @unique
+  Exam       Exam[]
 
   @@map("technicians")
+}
+
+model Exam {
+  id            Int         @id @default(autoincrement())
+  Technician    Technician  @relation(fields: [technicianId], references: [id])
+  technicianId  Int
+  Appointment   Appointment @relation(fields: [appointmentId], references: [id])
+  appointmentId Int
+  Result        Result[]
+
+  @@map("exams")
+}
+
+model Result {
+  id     Int    @id @default(autoincrement())
+  photo  String
+  Exam   Exam   @relation(fields: [examId], references: [id])
+  examId Int
+
+  @@map("results")
+}
+
+model Appointment {
+  id        Int    @id @default(autoincrement())
+  User      User   @relation(fields: [pacientId], references: [id])
+  pacientId Int
+  Exam      Exam[]
+  Doctor    Doctor @relation(fields: [doctorId], references: [id])
+  doctorId  Int
+
+  @@map("appointments")
 }

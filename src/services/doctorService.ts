@@ -10,7 +10,7 @@ export async function registerDoctor(user: IDoctorType) {
   }
   const existTechnicianCpf = await userRepository.findByCpf(user.cpf);
   if (existTechnicianCpf) {
-    throw { type: "Conflict", message: "Cpf already in use" };
+    throw { type: "Conflict", message: "CPF already in use" };
   }
   user.password = encrypt(user.password);
   const id = await userRepository.insert({
