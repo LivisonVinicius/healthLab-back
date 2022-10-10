@@ -1,6 +1,7 @@
 import { Router } from "express";
 import schemaValidator from "../middlewares/schemaValidator";
 import * as authControllers from "../controllers/authControllers";
+import validateToken from "../middlewares/tokenValidator";
 
 const authRouter = Router();
 
@@ -12,15 +13,17 @@ authRouter.post(
 
 authRouter.post(
   "/signup/technician",
+  validateToken,
   schemaValidator("registerTechnicianSchema"),
   authControllers.registerTechnician
-)
+);
 
 authRouter.post(
   "/signup/doctor",
+  validateToken,
   schemaValidator("registerDoctorSchema"),
   authControllers.registerDoctor
-)
+);
 
 authRouter.post(
   "/signin",

@@ -18,12 +18,14 @@ export async function login(req: Request, res: Response) {
 
 export async function registerTechnician(req: Request, res: Response) {
   const user: ITechnicianType = req.body;
-  await technicianService.registerTechnician(user);
+  const userId: number = res.locals.user.id;
+  await technicianService.registerTechnician(user, userId);
   return res.status(201).send("Technician created successfully!");
 }
 
 export async function registerDoctor(req: Request, res: Response) {
   const user: IDoctorType = req.body;
-  await doctorService.registerDoctor(user);
+  const userId: number = res.locals.user.id;
+  await doctorService.registerDoctor(user, userId);
   return res.status(201).send("Doctor created successfully!");
 }

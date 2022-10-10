@@ -1,12 +1,13 @@
 import { User } from "@prisma/client";
 import { Doctor } from "@prisma/client";
 import { Technician } from "@prisma/client";
+import { ExamTypes } from "@prisma/client";
 
 export type IUserType = Omit<User, "id">;
 export type ITechnicianType = {
   email: string;
   password: string;
-  speciality: string;
+  speciality: ExamTypes;
   name: string;
   cpf: string;
 };

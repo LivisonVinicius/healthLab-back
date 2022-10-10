@@ -54,7 +54,20 @@ export const registerTechnicianSchema = joi.object({
         "{#label} should contain at least {#min} numeric character",
       "password.noWhiteSpaces": "{#label} should not contain white spaces",
     }),
-  speciality: joi.string().required(),
+  speciality: joi
+    .string()
+    .valid(
+      "BloodCount",
+      "Genetic",
+      "Kidney",
+      "Laboratory",
+      "Prenatal",
+      "Thyroid",
+      "Urinalysis",
+      "Radiology",
+      "Tomography"
+    )
+    .required(),
   name: joi.string().required(),
   cpf: joi
     .string()

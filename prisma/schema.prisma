@@ -35,10 +35,10 @@ model Doctor {
 }
 
 model Technician {
-  id         Int    @id @default(autoincrement())
-  speciality String
-  User       User   @relation(fields: [userId], references: [id])
-  userId     Int    @unique
+  id         Int       @id @default(autoincrement())
+  speciality ExamTypes
+  User       User      @relation(fields: [userId], references: [id])
+  userId     Int       @unique
   Exam       Exam[]
 
   @@map("technicians")
@@ -73,4 +73,16 @@ model Appointment {
   doctorId  Int
 
   @@map("appointments")
+}
+
+enum ExamTypes {
+  BloodCount
+  Genetic
+  Kidney
+  Laboratory
+  Prenatal
+  Thyroid
+  Urinalysis
+  Radiology
+  Tomography
 }
