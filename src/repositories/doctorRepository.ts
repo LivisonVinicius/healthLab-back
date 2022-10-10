@@ -7,5 +7,6 @@ export async function insert(user: IDoctorInsertType) {
 }
 
 export async function getByUserId(id: number) {
-  return await client.doctor.findFirst({ where: { userId: id } });
+  const doctorData = await client.doctor.findFirst({ where: { userId: id } });
+  return doctorData;
 }

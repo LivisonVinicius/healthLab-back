@@ -18,7 +18,7 @@ model User {
   cpf                String        @unique
   Doctor             Doctor?
   Technician         Technician?
-  PacientAppointment Appointment[]
+  PatientAppointment Appointment[]
 
   @@map("users")
 }
@@ -66,8 +66,8 @@ model Result {
 
 model Appointment {
   id        Int    @id @default(autoincrement())
-  User      User   @relation(fields: [pacientId], references: [id])
-  pacientId Int
+  User      User   @relation(fields: [patientId], references: [id])
+  patientId Int
   Exam      Exam[]
   Doctor    Doctor @relation(fields: [doctorId], references: [id])
   doctorId  Int

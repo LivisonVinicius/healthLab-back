@@ -13,7 +13,7 @@ export async function findByEmail(email: string) {
 
 export async function findByCpf(cpf: string) {
   const user = await client.user.findFirst({ where: { cpf } });
-  return user;
+  return user?.id;
 }
 
 export async function findById(id: number) {

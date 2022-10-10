@@ -24,7 +24,6 @@ export default async function validateToken(
       throw { type: "Unauthorized", message: "Invalid Token" };
     }
     res.locals.user = user;
-    console.log(res.locals.user);
     next();
   } catch (err) {
     throw { type: "Unauthorized", message: "Invalid Token" };
