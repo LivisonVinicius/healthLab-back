@@ -3,6 +3,7 @@ import { encrypt } from "../utils/bcryptFunctions";
 import * as userRepository from "../repositories/userRepository";
 import * as technicianRepository from "../repositories/technicianRepository";
 import * as doctorRepository from "../repositories/doctorRepository";
+import { ExamTypes } from "@prisma/client";
 
 export async function registerTechnician(
   user: ITechnicianType,
@@ -31,4 +32,13 @@ export async function registerTechnician(
     userId: id,
     speciality: user.speciality,
   });
+}
+
+export async function getBySpeciality(speciality: ExamTypes, userId: number) {
+  const isDoctor = await doctorRepository.getByUserId(userId);
+  if (!isDoctor) {
+    throw { type: "Unauthorized", message: "User is not an doctor" };
+  }
+  const techArray = await technicianRepository.getUserBySpeciality(speciality);
+  return techArray;
 }
